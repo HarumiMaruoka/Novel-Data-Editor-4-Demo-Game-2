@@ -14,6 +14,13 @@ namespace Glib.NovelGameEditor
         public RootNode RootNode { get => _rootNode; set => _rootNode = value; }
         public IReadOnlyList<Node> Nodes => _nodes;
 
+        public Action<NovelNodeGraph> OnDestroyed;
+
+        private void OnDestroy()
+        {
+            OnDestroyed?.Invoke(this);
+        }
+
         public Node CreateNode(Type type)
         {
             var instance = ScriptableObject.CreateInstance(type) as Node;

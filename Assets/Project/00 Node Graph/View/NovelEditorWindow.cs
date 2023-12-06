@@ -45,6 +45,7 @@ namespace Glib.NovelGameEditor
 
             if (selectGameObject && selectGameObject.TryGetComponent(out NovelNodeGraph nodeGraph))
             {
+                nodeGraph.OnDestroyed += _ => OnSelectionChange();
                 _nodeGraphView.PopulateView(nodeGraph);
                 _invalidedLabel.style.opacity = 0f; // 非有効時のメッセージを隠す。
                 return;

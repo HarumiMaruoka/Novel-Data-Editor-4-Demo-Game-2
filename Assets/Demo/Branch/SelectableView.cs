@@ -5,28 +5,28 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class SelectionView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+public class SelectableView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField]
     private Text _textView;
     [SerializeField]
-    private Image _image;
+    private Image _background;
 
-    public event Action<SelectionView> OnSelected;
+    public event Action<SelectableView> OnSelected;
 
-    private BranchElement _selection;
-    public BranchElement Selection => _selection;
+    private BranchElement _selectable;
+    public BranchElement Selectable => _selectable;
 
     public void Initialize(BranchElement selection)
     {
-        _selection = selection;
-        _textView.text = _selection.Text;
+        _selectable = selection;
+        _textView.text = _selectable.Text;
     }
 
     public void Dispose()
     {
         OnSelected = null;
-        _selection = null;
+        _selectable = null;
     }
 
     public virtual void OnShow()
@@ -52,11 +52,11 @@ public class SelectionView : MonoBehaviour, IPointerClickHandler, IPointerEnterH
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        _image.color = Color.gray;
+        _background.color = Color.white;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        _image.color = Color.red;
+        _background.color = Color.red;
     }
 }

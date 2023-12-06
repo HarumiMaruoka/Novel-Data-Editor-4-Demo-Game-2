@@ -9,11 +9,6 @@ public class AnimationSequencer : NovelAnimationBehavior
     [SerializeField]
     private AnimationBundle[] _animationBundles;
 
-    private async void Start()
-    {
-        await PlayAnimationAsync();
-    }
-
     public async override UniTask PlayAnimationAsync()
     {
         List<UniTask> tasks = new List<UniTask>();

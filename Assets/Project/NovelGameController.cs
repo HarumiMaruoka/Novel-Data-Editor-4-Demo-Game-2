@@ -1,5 +1,4 @@
 // 日本語対応
-using System;
 using UnityEngine;
 
 namespace Glib.NovelGameEditor
@@ -11,7 +10,14 @@ namespace Glib.NovelGameEditor
 
         private Node _current = null;
 
+        private bool _isPaused = false;
+
         private void Start()
+        {
+            Play();
+        }
+
+        public void Play()
         {
             if (!_nodeGraph)
             {
@@ -24,12 +30,26 @@ namespace Glib.NovelGameEditor
                 node.Initialize(this);
             }
 
+            _isPaused = false;
+
             _current = _nodeGraph.RootNode.Child;
             _current.OnEnter();
         }
 
+        public void Pause()
+        {
+            _isPaused = true;
+        }
+
+        public void Resume()
+        {
+            _isPaused = false;
+        }
+
         private void Update()
         {
+            if (_isPaused) return;
+
             if (_current != null)
             {
                 _current.OnUpdate();

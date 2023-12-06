@@ -61,6 +61,7 @@ namespace Glib.NovelGameEditor
 
             _current = this;
             _nodeGraph = graph;
+            _nodeGraph.OnDestroyed += _ => ClearNodeGraphView();
 
             graphViewChanged += OnGraphViewChanged;
 

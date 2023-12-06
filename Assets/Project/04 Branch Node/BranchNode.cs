@@ -7,9 +7,19 @@ namespace Glib.NovelGameEditor
 {
     public class BranchNode : Node, IMultiParent
     {
+#if Novel_Game_Editor_4_Development
         [SerializeField]
+#else
+        [SerializeField]
+        [HideInInspector]
+#endif
         private List<Node> _parents = new List<Node>();
+#if Novel_Game_Editor_4_Development
         [SerializeField]
+#else
+        [SerializeField]
+        [HideInInspector]
+#endif
         private List<BranchElement> _elements = new List<BranchElement>();
         [SerializeField]
         private NovelBranchBehaviour[] _behaviours;

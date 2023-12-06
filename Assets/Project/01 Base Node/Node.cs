@@ -5,7 +5,12 @@ namespace Glib.NovelGameEditor
 {
     public class Node : ScriptableObject
     {
+#if Novel_Game_Editor_4_Development
         [SerializeField]
+#else
+        [SerializeField]
+        [HideInInspector]
+#endif
         private NodeViewData _viewData;
         [SerializeField]
         private string _nodeName;

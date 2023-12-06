@@ -5,7 +5,12 @@ namespace Glib.NovelGameEditor
 {
     public class BranchElement : Node, ISingleChild
     {
+#if Novel_Game_Editor_4_Development
         [SerializeField]
+#else
+        [SerializeField]
+        [HideInInspector]
+#endif
         private Node _child;
         [SerializeField]
         private string _text;

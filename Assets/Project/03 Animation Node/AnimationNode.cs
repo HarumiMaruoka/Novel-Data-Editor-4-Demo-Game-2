@@ -6,9 +6,19 @@ namespace Glib.NovelGameEditor
 {
     public class AnimationNode : Node, ISingleChild, IMultiParent
     {
+#if Novel_Game_Editor_4_Development
         [SerializeField]
+#else
+        [SerializeField]
+        [HideInInspector]
+#endif
         private Node _child = null;
+#if Novel_Game_Editor_4_Development
         [SerializeField]
+#else
+        [SerializeField]
+        [HideInInspector]
+#endif
         private List<Node> _parents = new List<Node>();
         [SerializeField]
         private NovelAnimationController _novelAnimationController;
