@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -37,8 +38,8 @@ namespace Glib.NovelGameEditor
             var types = TypeCache.GetTypesDerivedFrom<Glib.NovelGameEditor.Node>();
             foreach (var type in types)
             {
-                if (type == typeof(RootNode)) continue;
-                if (type == typeof(BranchElement)) continue;
+                var contextMenuAttribute = Attribute.GetCustomAttribute(type, typeof(GraphViewContextMenuAttribute));
+                if (contextMenuAttribute == null) continue;
 
                 var mousePos = GetMousePosition(evt);
 
@@ -93,6 +94,22 @@ namespace Glib.NovelGameEditor
 
         private void CreateNodeView(Glib.NovelGameEditor.Node node, UnityEngine.Vector2 initialPos)
         {
+            var nodeViewTypes = Assembly.GetAssembly(typeof(NodeView)).GetTypes();
+
+            var withAttributeTypes = nodeViewTypes
+                .Where(type => Attribute.IsDefined(type, typeof(RelatedModelAttribute)));
+
+            Type viewType = null;
+
+            foreach (var type in withAttributeTypes)
+            {
+                var att = type.GetCustomAttribute<RelatedModelAttribute>();
+                if (node.GetType() == att.ModelType)
+                {
+                    viewType = type; break;
+                }
+            }
+
             NodeView nodeView = null;
 
             // Create Root Node View

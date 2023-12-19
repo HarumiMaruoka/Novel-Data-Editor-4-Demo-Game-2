@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Glib.NovelGameEditor
 {
+    [GraphViewContextMenu]
     public class AnimationNode : Node, ISingleChild, IMultiParent
     {
 #if Novel_Game_Editor_4_Development

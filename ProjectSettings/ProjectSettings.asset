@@ -803,7 +803,7 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Standalone: 
+    Standalone: Novel_Game_Editor_4_Development
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}

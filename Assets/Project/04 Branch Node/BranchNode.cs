@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Glib.NovelGameEditor
 {
+    [GraphViewContextMenu]
     public class BranchNode : Node, IMultiParent
     {
 #if Novel_Game_Editor_4_Development
